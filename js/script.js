@@ -70,16 +70,31 @@ function animateHeroText(swiper) {
 
 function renderBanners() {
     const wrapper = document.getElementById('hero-wrapper');
-    wrapper.innerHTML = siteData.banners.map(banner => `
-        <div class="swiper-slide hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${banner.image}');">
-            <div class="container hero-content">
-                <h2 class="animate-text">${banner.title}</h2>
-                <p class="animate-text">${banner.text}</p>
-                <a href="${banner.link}" class="btn btn-gold animate-text">${banner.buttonText}</a>
+    const isMobile = window.innerWidth <= 768;
+
+    wrapper.innerHTML = siteData.banners.map(banner => {
+        const bgImage = (isMobile && banner.imageMobile) ? banner.imageMobile : (banner.imageDesktop || banner.image);
+        return `
+            <div class="swiper-slide hero-slide" style="background-image: url('${bgImage}');">
+                <div class="container hero-content">
+                    <h2 class="animate-text">${banner.title}</h2>
+                    <p class="animate-text">${banner.text}</p>
+                    <a href="${banner.link}" class="btn btn-gold animate-text">${banner.buttonText}</a>
+                </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
+
+// Add resize listener to re-render banners if device orientation/size changes
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        renderBanners();
+        if (typeof initSwiper === 'function') initSwiper();
+    }, 250);
+});
 
 function renderCategories() {
     const grid = document.getElementById('categories-grid');

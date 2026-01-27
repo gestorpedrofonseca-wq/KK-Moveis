@@ -67,10 +67,11 @@ function renderBannersAdmin() {
     const list = document.getElementById('banners-list');
     list.innerHTML = currentData.banners.map((b, i) => `
         <div class="list-item">
-            <img src="${b.image}" class="preview-img">
+            <img src="${b.imageDesktop || b.image}" class="preview-img">
             <div class="item-info">
                 <h4>${b.title}</h4>
                 <p>${b.text.substring(0, 50)}...</p>
+                <small>Desktop & Mobile configurados</small>
             </div>
             <div class="item-actions">
                 <button class="btn-edit" onclick="showBannerModal(${i})">Editar</button>
@@ -83,26 +84,42 @@ function renderBannersAdmin() {
 window.showBannerModal = (index = -1) => {
     activeModalType = 'banners';
     editIndex = index;
-    const b = index > -1 ? currentData.banners[index] : { title: '', text: '', image: '', buttonText: 'Ver Coleção', link: '#products' };
+    const b = index > -1 ? currentData.banners[index] : { title: '', text: '', imageDesktop: '', imageMobile: '', buttonText: 'Ver Coleção', link: '#products' };
 
     showModal(index > -1 ? 'Editar Banner' : 'Novo Banner', `
         <div class="form-group"><label>Título</label><input type="text" name="title" value="${b.title}" required></div>
         <div class="form-group"><label>Texto</label><textarea name="text" required>${b.text}</textarea></div>
-        <div class="form-group">
-            <label>Imagem do Banner (Recomendado: 1920x1080px)</label>
-            <div class="upload-area">
-                <input type="file" id="file-banner" accept="image/*" style="display:none">
-                <input type="hidden" name="image" id="input-image-banner" value="${b.image}">
-                <div class="upload-preview" onclick="document.getElementById('file-banner').click()">
-                    <img src="${b.image || 'https://via.placeholder.com/1920x1080?text=Enviar+Imagem'}" id="preview-banner">
-                    <span>Clique para trocar imagem</span>
+        
+        <div class="settings-grid-admin" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label>Imagem Desktop (1920x1080)</label>
+                <div class="upload-area">
+                    <input type="file" id="file-banner-desktop" accept="image/*" style="display:none">
+                    <input type="hidden" name="imageDesktop" id="input-image-desktop" value="${b.imageDesktop || b.image || ''}">
+                    <div class="upload-preview" onclick="document.getElementById('file-banner-desktop').click()">
+                        <img src="${b.imageDesktop || b.image || 'https://via.placeholder.com/1920x1080?text=Desktop'}" id="preview-banner-desktop">
+                        <span>Trocar Desktop</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Imagem Mobile (800x1200)</label>
+                <div class="upload-area">
+                    <input type="file" id="file-banner-mobile" accept="image/*" style="display:none">
+                    <input type="hidden" name="imageMobile" id="input-image-mobile" value="${b.imageMobile || ''}">
+                    <div class="upload-preview" onclick="document.getElementById('file-banner-mobile').click()">
+                        <img src="${b.imageMobile || 'https://via.placeholder.com/800x1200?text=Mobile'}" id="preview-banner-mobile">
+                        <span>Trocar Mobile</span>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="form-group"><label>Texto do Botão</label><input type="text" name="buttonText" value="${b.buttonText}"></div>
         <div class="form-group"><label>Link</label><input type="text" name="link" value="${b.link}"></div>
     `);
-    setupFileUpload('file-banner', 'preview-banner', 'input-image-banner');
+    setupFileUpload('file-banner-desktop', 'preview-banner-desktop', 'input-image-desktop');
+    setupFileUpload('file-banner-mobile', 'preview-banner-mobile', 'input-image-mobile');
 }
 
 // CATEGORIES

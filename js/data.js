@@ -3,14 +3,16 @@ const defaultData = {
         {
             title: "Design que Inspira",
             text: "Móveis exclusivos com acabamento em ouro e materiais nobres para transformar sua sala de estar.",
-            image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=2000",
+            imageDesktop: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=2000",
+            imageMobile: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80&w=800",
             buttonText: "Ver Coleção",
             link: "#products"
         },
         {
             title: "Tecnologia & Estilo",
             text: "Eletrodomésticos de última geração que unem performance e sofisticação para sua cozinha.",
-            image: "https://images.unsplash.com/photo-1556911223-e124ac3448af?auto=format&fit=crop&q=80&w=2000",
+            imageDesktop: "https://images.unsplash.com/photo-1556911223-e124ac3448af?auto=format&fit=crop&q=80&w=2000",
+            imageMobile: "https://images.unsplash.com/photo-1556911223-e124ac3448af?auto=format&fit=crop&q=80&w=800",
             buttonText: "Explorar Agora",
             link: "#products"
         }
