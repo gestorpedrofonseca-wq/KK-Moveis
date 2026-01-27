@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K.K Móveis | Elegância e Conforto para seu Lar</title>
+    <meta name="description"
+        content="K.K Móveis - A melhor seleção de móveis e eletrodomésticos premium. Transforme sua casa com estilo e sofisticação.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="assets/logo.png" alt="K.K Móveis Logo" id="site-logo">
+            </div>
+
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#home" class="active">Início</a></li>
+                    <li><a href="#about">Sobre Nós</a></li>
+                    <li><a href="#categories">Categorias</a></li>
+                    <li><a href="#products">Produtos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="admin.html" class="admin-link" title="Painel Administrativo">
+                    <i class="fas fa-cog"></i>
+                </a>
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre Nós</a></li>
+                <li><a href="#categories">Categorias</a></li>
+                <li><a href="#products">Produtos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Home / Hero Swiper -->
+        <section id="home" class="hero-section">
+            <div class="swiper hero-swiper">
+                <div class="swiper-wrapper" id="hero-wrapper">
+                    <!-- Dynamic Banners -->
+                </div>
+                <!-- Pagination & Navigation -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section id="categories" class="categories-section section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="subtitle">Explorar</span>
+                    <h2 class="section-title">Nossas Categorias</h2>
+                    <div class="gold-divider"></div>
+                </div>
+
+                <div class="categories-grid" id="categories-grid">
+                    <!-- Dynamic Categories -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section id="products" class="products-section section-padding">
+            <div class="container">
+                <div class="section-header flex-header">
+                    <div>
+                        <span class="subtitle">Premium</span>
+                        <h2 class="section-title">Produtos em Destaque</h2>
+                        <div class="gold-divider-start"></div>
+                    </div>
+                    <div class="product-filters">
+                        <button class="filter-btn active" data-filter="all">Tudo</button>
+                        <button class="filter-btn" data-filter="Sala de Estar">Salas</button>
+                        <button class="filter-btn" data-filter="Estofados">Estofados</button>
+                        <button class="filter-btn" data-filter="Dormitórios">Quartos</button>
+                        <button class="filter-btn" data-filter="Cozinha & Eletro">Eletro</button>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be generated by JS -->
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="#" class="btn btn-outline-gold">Ver Todos os Produtos</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section (History) -->
+        <section id="about" class="about-section section-padding">
+            <!-- Dynamic About content -->
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section section-padding">
+            <div class="contact-bg-overlay"></div>
+            <div class="container relative z-10">
+                <div class="section-header text-center light-theme">
+                    <span class="subtitle">Atendimento Exclusivo</span>
+                    <h2 class="section-title">Entre em Contato</h2>
+                    <div class="gold-divider"></div>
+                </div>
+
+                <div class="contact-content-wrapper">
+                    <!-- Cards Grid -->
+                    <div class="contact-cards">
+                        <!-- WhatsApp Card -->
+                        <div class="contact-card glass-effect">
+                            <div class="card-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3>WhatsApp</h3>
+                            <p>Atendimento rápido e personalizado para você.</p>
+                            <a href="https://wa.me/558896476645" class="btn btn-gold full-width">Conversar Agora</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="site-footer">
+        <!-- Dynamic Footer content -->
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/558896476645" class="float-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

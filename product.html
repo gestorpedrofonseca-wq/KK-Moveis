@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto | K.K Móveis</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="main-header" class="scrolled">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html"><img src="assets/logo.png" alt="K.K Móveis Logo" id="site-logo"></a>
+            </div>
+
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html#home">Início</a></li>
+                    <li><a href="index.html#about">Sobre Nós</a></li>
+                    <li><a href="index.html#categories">Categorias</a></li>
+                    <li><a href="index.html#products">Produtos</a></li>
+                    <li><a href="index.html#contact">Contato</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="admin.html" class="admin-link" title="Painel Administrativo">
+                    <i class="fas fa-cog"></i>
+                </a>
+                <button class="mobile-menu-btn" id="mobile-menu-open">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="product-detail-page section-padding">
+        <div class="container" id="product-container">
+            <!-- Dynamic Content -->
+        </div>
+    </main>
+
+    <!-- Footer Dynamic -->
+    <footer class="site-footer" id="site-footer"></footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="#" class="float-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/product.js"></script>
+</body>
+
+</html>
