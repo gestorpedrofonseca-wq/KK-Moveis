@@ -111,12 +111,8 @@
                         <h2 class="section-title">Produtos em Destaque</h2>
                         <div class="gold-divider-start"></div>
                     </div>
-                    <div class="product-filters">
-                        <button class="filter-btn active" data-filter="all">Tudo</button>
-                        <button class="filter-btn" data-filter="Sala de Estar">Salas</button>
-                        <button class="filter-btn" data-filter="Estofados">Estofados</button>
-                        <button class="filter-btn" data-filter="Dormitórios">Quartos</button>
-                        <button class="filter-btn" data-filter="Cozinha & Eletro">Eletro</button>
+                    <div class="product-filters" id="product-filters">
+                        <!-- Dynamic Filters will be injected here -->
                     </div>
                 </div>
 
@@ -125,7 +121,7 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <a href="#" class="btn btn-outline-gold">Ver Todos os Produtos</a>
+                    <button id="load-more-btn" class="btn btn-outline-gold">Ver Mais Produtos</button>
                 </div>
             </div>
         </section>
