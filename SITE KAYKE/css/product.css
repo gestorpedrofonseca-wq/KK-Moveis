@@ -1,0 +1,137 @@
+.product-detail-page {
+    padding-top: 150px;
+}
+
+.product-detail-flex {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.product-media {
+    flex: 1;
+}
+
+.product-media img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-content {
+    flex: 1;
+}
+
+.product-content .badge {
+    display: inline-block;
+    background: var(--gold);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.product-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.detail-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold-dark);
+    margin-bottom: 30px;
+}
+
+.detail-price span {
+    font-size: 1.2rem;
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 15px;
+}
+
+.description-block {
+    margin-bottom: 40px;
+}
+
+.description-block h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--black);
+}
+
+.description-block p {
+    color: #555;
+    line-height: 1.8;
+}
+
+.specs-list {
+    background: var(--light-grey);
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.spec-item:last-child {
+    border-bottom: none;
+}
+
+.spec-label {
+    font-weight: 700;
+    color: var(--dark-grey);
+}
+
+.product-actions-detail {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-whatsapp-large {
+    flex: 1;
+    background: #25D366;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: var(--transition);
+}
+
+.btn-whatsapp-large:hover {
+    background: #128C7E;
+    transform: translateY(-3px);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    color: var(--gold);
+    font-weight: 600;
+}
+
+@media (max-width: 992px) {
+    .product-detail-flex {
+        flex-direction: column;
+    }
+
+    .product-content h1 {
+        font-size: 2rem;
+    }
+}
