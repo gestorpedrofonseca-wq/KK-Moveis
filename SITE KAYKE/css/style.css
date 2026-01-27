@@ -575,22 +575,49 @@ a {
 @media (max-width: 992px) {
     .categories-grid {
         grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 200px;
     }
 
-    .category-card:nth-child(1),
+    .category-card:nth-child(1) {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
     .category-card:nth-child(2) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .category-card:nth-child(3) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .category-card:nth-child(4) {
         grid-column: span 2;
+        grid-row: span 1;
     }
 }
 
 @media (max-width: 600px) {
     .categories-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 300px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 180px;
+        gap: 12px;
     }
 
-    .category-card:nth-child(n) {
-        grid-column: span 1;
+    .category-overlay {
+        padding: 20px;
+    }
+
+    .category-overlay h3 {
+        font-size: 1.4rem;
+    }
+
+    .category-card .cat-number {
+        top: 15px;
+        left: 20px;
+        font-size: 0.7rem;
     }
 }
 
@@ -793,22 +820,162 @@ a {
     }
 }
 
-/* Newsletter Section */
-.newsletter-section {
-    background: var(--black);
+/* Contact Section - Premium Dark Theme */
+.contact-section {
+    position: relative;
+    background-color: var(--black);
+    color: var(--white);
+    background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    overflow: hidden;
+}
+
+.contact-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.85));
+    z-index: 1;
+}
+
+.contact-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Light Theme Overrides for Contact Section */
+.light-theme .section-title {
     color: var(--white);
 }
 
-.newsletter-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 50px;
+.light-theme .subtitle {
+    color: var(--gold);
 }
 
-.newsletter-text h2 {
+.contact-content-wrapper {
+    margin-top: 50px;
+}
+
+.contact-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.contact-card {
+    background: rgba(40, 40, 40, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    max-width: 450px;
+    width: 100%;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.1), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.contact-card:hover::before {
+    opacity: 1;
+}
+
+.contact-card:hover {
+    transform: translateY(-15px);
+    background: rgba(40, 40, 40, 0.6);
+    border-color: var(--gold);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
     font-size: 2.5rem;
+    color: var(--gold);
+    transition: var(--transition);
+    position: relative;
+    z-index: 2;
+}
+
+.contact-card:hover .card-icon {
+    background: var(--gold);
+    color: var(--white);
+    transform: scale(1.1) rotate(10deg);
+}
+
+.contact-card h3 {
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
     margin-bottom: 15px;
+    color: var(--white);
+    position: relative;
+    z-index: 2;
+}
+
+.contact-card p {
+    color: #ccc;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+}
+
+.full-width {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-link-gold {
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+    margin-top: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-link-gold:hover {
+    color: var(--white);
+    letter-spacing: 3px;
 }
 
 /* Footer Styles */
@@ -899,8 +1066,8 @@ a {
 
 /* Mobile Responsive */
 @media (max-width: 992px) {
-    :root {
-        --section-padding: 60px;
+    .section-padding {
+        padding: 60px 0;
     }
 
     .desktop-nav {
@@ -923,21 +1090,16 @@ a {
         font-size: 1rem;
         max-width: 100%;
     }
-
-    .newsletter-content {
-        flex-direction: column;
-        text-align: center;
-    }
 }
 
 @media (max-width: 768px) {
     .section-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .section-header::after {
-        font-size: 7rem;
-        top: -10px;
+        font-size: 6rem;
+        top: -5px;
     }
 
     .footer-top {
@@ -970,6 +1132,12 @@ a {
     .product-filters {
         justify-content: center;
         flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .filter-btn {
+        font-size: 0.7rem;
+        padding: 5px 10px;
     }
 
     #products .section-header::after {
@@ -985,20 +1153,33 @@ a {
         left: 50%;
         transform: translate(-50%, -50%) rotate(45deg);
     }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-content h2 {
+        font-size: 2.4rem;
+    }
 }
 
-/* Mobile Menu Overlay */
+/* Stunning Mobile Menu Overlay */
 .mobile-menu {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 80%;
-    height: 100%;
-    background: var(--white);
+    width: 100%;
+    height: 100vh;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: 2000;
-    padding: 50px;
-    transition: 0.5s ease;
-    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    padding: 20px;
 }
 
 .mobile-menu.active {
@@ -1007,18 +1188,81 @@ a {
 
 .mobile-menu-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 2rem;
+    top: 30px;
+    right: 30px;
+    font-size: 2.5rem;
     background: transparent;
     border: none;
+    color: var(--white);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-close:hover {
+    transform: rotate(90deg);
+    color: var(--gold);
+}
+
+.mobile-menu ul {
+    list-style: none;
+    text-align: center;
+    width: 100%;
 }
 
 .mobile-menu li {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    overflow: hidden;
 }
 
 .mobile-menu a {
-    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
     font-weight: 700;
+    color: var(--white);
+    display: block;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.mobile-menu a:hover {
+    color: var(--gold);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.mobile-menu.active a {
+    animation: slideUpFade 0.8s forwards;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered animation for menu items */
+.mobile-menu li:nth-child(1) a {
+    animation-delay: 0.1s;
+}
+
+.mobile-menu li:nth-child(2) a {
+    animation-delay: 0.2s;
+}
+
+.mobile-menu li:nth-child(3) a {
+    animation-delay: 0.3s;
+}
+
+.mobile-menu li:nth-child(4) a {
+    animation-delay: 0.4s;
+}
+
+.mobile-menu li:nth-child(5) a {
+    animation-delay: 0.5s;
 }

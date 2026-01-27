@@ -29,8 +29,24 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
         document.getElementById(tabId).classList.add('active');
         document.getElementById('current-tab-title').textContent = btn.textContent.trim();
         renderTabContent(tabId);
+
+        // Close sidebar on mobile after clicking
+        if (window.innerWidth <= 992) {
+            document.querySelector('.sidebar').classList.remove('active');
+        }
     });
 });
+
+// Sidebar Toggle (Mobile)
+setTimeout(() => {
+    const toggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    }
+}, 500);
 
 function initAdmin() {
     renderTabContent('tab-banners');
@@ -132,7 +148,7 @@ function renderProductsAdmin() {
     const list = document.getElementById('products-list');
     list.innerHTML = currentData.products.map((p, i) => `
         <div class="list-item">
-            <img src="${p.image}" class="preview-img">
+            <img src="${p.images ? p.images[0] : ''}" class="preview-img">
             <div class="item-info">
                 <h4>${p.name}</h4>
                 <p>R$ ${p.price} | ${p.category}</p>
@@ -148,30 +164,76 @@ function renderProductsAdmin() {
 window.showProductModal = (index = -1) => {
     activeModalType = 'products';
     editIndex = index;
-    const p = index > -1 ? currentData.products[index] : { name: '', category: 'Salas', price: '', oldPrice: '', image: '', badge: '', description: '', dimensions: '', material: '' };
+    const p = index > -1 ? currentData.products[index] : { name: '', category: 'Salas', price: '', oldPrice: '', images: [], badge: '', description: '', dimensions: '', material: '', condition: 'Novo' };
+
+    // Ensure images is an array
+    if (!p.images) p.images = [];
+
+    let imagesHtml = p.images.map((img, i) => `
+        <div class="gallery-item-admin" data-index="${i}">
+            <img src="${img}">
+            <button type="button" class="btn-remove-img" onclick="removeProductImage(${i})"><i class="fas fa-times"></i></button>
+        </div>
+    `).join('');
+
     showModal(index > -1 ? 'Editar Produto' : 'Novo Produto', `
         <div class="form-group"><label>Nome do Produto</label><input type="text" name="name" value="${p.name}" required></div>
         <div class="form-group"><label>Categoria</label><input type="text" name="category" value="${p.category}" required></div>
         <div class="form-group"><label>Preço (Ex: 1.500,00)</label><input type="text" name="price" value="${p.price}" required></div>
         <div class="form-group"><label>Preço Antigo (Opcional)</label><input type="text" name="oldPrice" value="${p.oldPrice}"></div>
+        
         <div class="form-group">
-            <label>Imagem do Produto</label>
-            <div class="upload-area">
-                <input type="file" id="file-prod" accept="image/*" style="display:none">
-                <input type="hidden" name="image" id="input-image-prod" value="${p.image}">
-                <div class="upload-preview" onclick="document.getElementById('file-prod').click()">
-                    <img src="${p.image || 'https://via.placeholder.com/300?text=Enviar+Imagem'}" id="preview-prod">
-                    <span>Mudar foto</span>
+            <label>Galeria de Imagens (A primeira será a capa)</label>
+            <div class="gallery-admin-container">
+                <div id="product-gallery-list" class="gallery-list-admin">
+                    ${imagesHtml}
+                </div>
+                <div class="upload-area mini">
+                    <input type="file" id="file-prod-gallery" accept="image/*" style="display:none" multiple>
+                    <div class="upload-preview mini" onclick="document.getElementById('file-prod-gallery').click()">
+                        <i class="fas fa-plus"></i>
+                        <span>Adicionar Foto</span>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="form-group"><label>Etiqueta (Ex: Novo, Promo)</label><input type="text" name="badge" value="${p.badge || ''}"></div>
         <div class="form-group"><label>Descrição Detalhada</label><textarea name="description">${p.description || ''}</textarea></div>
         <div class="form-group"><label>Dimensões (Ex: 200x100x50cm)</label><input type="text" name="dimensions" value="${p.dimensions || ''}"></div>
         <div class="form-group"><label>Material / Acabamento</label><input type="text" name="material" value="${p.material || ''}"></div>
         <div class="form-group"><label>Estado do Produto (Ex: Novo, Usado)</label><input type="text" name="condition" value="${p.condition || 'Novo'}"></div>
     `);
-    setupFileUpload('file-prod', 'preview-prod', 'input-image-prod');
+
+    // Handle multiple file selection
+    const fileInput = document.getElementById('file-prod-gallery');
+    fileInput.addEventListener('change', function () {
+        const files = Array.from(this.files);
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const base64 = e.target.result;
+                p.images.push(base64);
+                refreshProductGallery(p.images);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+    window.removeProductImage = (i) => {
+        p.images.splice(i, 1);
+        refreshProductGallery(p.images);
+    };
+
+    function refreshProductGallery(images) {
+        const list = document.getElementById('product-gallery-list');
+        list.innerHTML = images.map((img, i) => `
+            <div class="gallery-item-admin">
+                <img src="${img}">
+                <button type="button" class="btn-remove-img" onclick="removeProductImage(${i})"><i class="fas fa-times"></i></button>
+            </div>
+        `).join('');
+    }
 }
 
 // ABOUT
@@ -209,24 +271,56 @@ function renderAboutAdmin() {
     };
 }
 
-// CONTACT
+// CONTACT & SITE IDENTITY
 function renderContactAdmin() {
     const form = document.getElementById('contact-form');
     const c = currentData.contact;
+    const siteTitle = currentData.siteTitle || 'K.K Móveis';
+    const siteLogo = currentData.siteLogo || 'assets/logo.png';
+
     form.innerHTML = `
-        <h3>Configurações de Contato e Redes</h3><br>
-        <div class="form-group"><label>WhatsApp (Somente números com DDD)</label><input type="text" name="whatsapp" value="${c.whatsapp}"></div>
-        <div class="form-group"><label>Telefone Exibição</label><input type="text" name="phone" value="${c.phone}"></div>
-        <div class="form-group"><label>E-mail</label><input type="email" name="email" value="${c.email}"></div>
-        <div class="form-group"><label>Endereço Completo</label><input type="text" name="address" value="${c.address}"></div>
-        <div class="form-group"><label>Link Instagram</label><input type="text" name="instagram" value="${c.instagram}"></div>
-        <div class="form-group"><label>Link Facebook</label><input type="text" name="facebook" value="${c.facebook}"></div>
+        <div class="settings-grid-admin">
+            <div class="settings-group-admin">
+                <h3>Identidade Visual</h3><br>
+                <div class="form-group"><label>Nome da Loja</label><input type="text" name="siteTitle" value="${siteTitle}"></div>
+                <div class="form-group">
+                    <label>Logotipo do Site</label>
+                    <div class="upload-area">
+                        <input type="file" id="file-logo" accept="image/*" style="display:none">
+                        <input type="hidden" name="siteLogo" id="input-image-logo" value="${siteLogo}">
+                        <div class="upload-preview mini-preview" onclick="document.getElementById('file-logo').click()">
+                            <img src="${siteLogo}" id="preview-logo">
+                            <span>Alterar Logo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group-admin">
+                <h3>Redes Sociais & Contato</h3><br>
+                <div class="form-group"><label>WhatsApp (Somente números com DDD: 55...)</label><input type="text" name="whatsapp" value="${c.whatsapp}"></div>
+                <div class="form-group"><label>Link Instagram</label><input type="text" name="instagram" value="${c.instagram}"></div>
+                <div class="form-group"><label>Link Facebook</label><input type="text" name="facebook" value="${c.facebook}"></div>
+            </div>
+        </div>
         <button type="submit" class="btn-admin">Salvar Configurações</button>
     `;
+    setupFileUpload('file-logo', 'preview-logo', 'input-image-logo');
+
     form.onsubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(form);
-        currentData.contact = Object.fromEntries(formData.entries());
+        const data = Object.fromEntries(formData.entries());
+
+        currentData.siteTitle = data.siteTitle;
+        currentData.siteLogo = data.siteLogo;
+        currentData.contact = {
+            whatsapp: data.whatsapp,
+            instagram: data.instagram,
+            facebook: data.facebook,
+            pinterest: currentData.contact.pinterest || '#'
+        };
+
         saveSiteData(currentData);
         alert('Configurações salvas!');
     };
@@ -248,8 +342,17 @@ document.getElementById('admin-modal-form').onsubmit = (e) => {
     const formData = new FormData(e.target);
     const itemData = Object.fromEntries(formData.entries());
 
-    if (activeModalType === 'products' && editIndex === -1) {
-        itemData.id = Date.now();
+    // Special handling for Product Gallery
+    if (activeModalType === 'products') {
+        const galleryImgs = Array.from(document.querySelectorAll('#product-gallery-list img')).map(img => img.src);
+        itemData.images = galleryImgs;
+
+        // Ensure ID for new products
+        if (editIndex === -1) {
+            itemData.id = Date.now();
+        } else {
+            itemData.id = currentData.products[editIndex].id;
+        }
     }
 
     if (editIndex > -1) {

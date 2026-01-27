@@ -2,12 +2,23 @@
 let siteData = getSiteData();
 
 function initPage() {
+    updateSiteIdentity();
     renderBanners();
     renderCategories();
     renderProducts();
     renderAbout();
     renderFooter();
     initSwiper();
+}
+
+function updateSiteIdentity() {
+    const logoImg = document.getElementById('site-logo');
+    if (logoImg && siteData.siteLogo) {
+        logoImg.src = siteData.siteLogo;
+    }
+    if (siteData.siteTitle) {
+        document.title = `${siteData.siteTitle} | Elegância e Conforto para seu Lar`;
+    }
 }
 
 function initSwiper() {
@@ -113,11 +124,16 @@ function renderProducts(filter = 'all') {
         : siteData.products.filter(p => p.category === filter);
 
     filteredProducts.forEach(product => {
+        // Handle image safely (fallback to legacy 'image' or first item in 'images')
+        const displayImage = (product.images && product.images.length > 0)
+            ? product.images[0]
+            : (product.image || 'https://via.placeholder.com/400?text=Sem+Imagem');
+
         const productHTML = `
             <div class="product-card">
                 <a href="product.html?id=${product.id}" class="product-link-wrapper">
                     <div class="product-img">
-                        <img src="${product.image}" alt="${product.name}">
+                        <img src="${displayImage}" alt="${product.name}">
                         ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
                         <div class="product-actions">
                             <span class="btn-product-overlay">Ver Detalhes</span>
@@ -172,11 +188,14 @@ function renderAbout() {
 function renderFooter() {
     const footer = document.getElementById('site-footer');
     const c = siteData.contact;
+    const siteTitle = siteData.siteTitle || 'K.K Móveis';
+    const siteLogo = siteData.siteLogo || 'assets/logo.png';
+
     footer.innerHTML = `
         <div class="container footer-top">
             <div class="footer-info">
-                <img src="assets/logo.png" alt="K.K Móveis Logo" class="footer-logo">
-                <p>K.K Móveis é sinônimo de luxo, qualidade e durabilidade. Especialistas em transformar casas em lares extraordinários.</p>
+                <img src="${siteLogo}" alt="${siteTitle} Logo" class="footer-logo">
+                <p>${siteTitle} é sinônimo de luxo, qualidade e durabilidade. Especialistas em transformar casas em lares extraordinários.</p>
                 <div class="social-links">
                     <a href="${c.instagram}"><i class="fab fa-instagram"></i></a>
                     <a href="${c.facebook}"><i class="fab fa-facebook"></i></a>
@@ -195,16 +214,15 @@ function renderFooter() {
             </div>
             
             <div class="footer-contact">
-                <h3>Onde Estamos</h3>
-                <p><i class="fas fa-map-marker-alt"></i> ${c.address}</p>
-                <p><i class="fas fa-phone"></i> ${c.phone}</p>
-                <p><i class="fas fa-envelope"></i> ${c.email}</p>
+                <h3>Contato</h3>
+                <p><i class="fab fa-whatsapp"></i> Atendimento via WhatsApp</p>
+                <a href="https://wa.me/${c.whatsapp}" class="btn-link-gold">Conversar Agora <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
         
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; 2026 K.K Móveis. Todos os direitos reservados.</p>
+                <p>&copy; 2026 ${siteTitle}. Todos os direitos reservados.</p>
             </div>
         </div>
     `;

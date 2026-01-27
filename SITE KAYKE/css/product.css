@@ -1,137 +1,450 @@
+/* Product Page Specific Styles - Luxury KK Móveis Identity */
 .product-detail-page {
-    padding-top: 150px;
+    padding-top: 140px;
+    background-color: #fff;
+    min-height: 100vh;
 }
 
-.product-detail-flex {
+.product-breadcrumb {
     display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.product-breadcrumb .sep {
+    color: var(--gold);
+    font-size: 0.6rem;
+}
+
+.product-breadcrumb a {
+    color: #999;
+}
+
+.product-breadcrumb .current {
+    color: var(--black);
+    font-weight: 700;
+}
+
+/* MAIN LAYOUT */
+.product-luxury-layout {
+    display: grid;
+    grid-template-columns: 1fr 450px;
     gap: 60px;
+    align-items: start;
+}
+
+/* SHOWCASE - IMAGES */
+.product-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.gallery-wrapper {
+    display: flex;
+    gap: 25px;
     align-items: flex-start;
 }
 
-.product-media {
-    flex: 1;
+.product-thumbnails-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 90px;
+    flex-shrink: 0;
 }
 
-.product-media img {
+.lux-thumb {
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fdfdfd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lux-thumb:hover {
+    transform: scale(1.05);
+}
+
+.lux-thumb.active {
+    border-color: var(--gold);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+    transform: translateX(5px);
+}
+
+.lux-thumb img {
     width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    object-fit: cover;
 }
 
-.product-content {
+.product-main-view {
     flex: 1;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f9f9f9;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    aspect-ratio: 4/5;
+    max-height: 700px;
 }
 
-.product-content .badge {
-    display: inline-block;
-    background: var(--gold);
-    color: white;
-    padding: 5px 15px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin-bottom: 15px;
+.product-swiper {
+    width: 100%;
+    height: 100%;
 }
 
-.product-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
-
-.detail-price {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--gold-dark);
-    margin-bottom: 30px;
-}
-
-.detail-price span {
-    font-size: 1.2rem;
-    text-decoration: line-through;
-    color: #999;
-    margin-left: 15px;
-}
-
-.description-block {
-    margin-bottom: 40px;
-}
-
-.description-block h3 {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-    color: var(--black);
-}
-
-.description-block p {
-    color: #555;
-    line-height: 1.8;
-}
-
-.specs-list {
-    background: var(--light-grey);
-    padding: 30px;
-    border-radius: 8px;
-    margin-bottom: 40px;
-}
-
-.spec-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.spec-item:last-child {
-    border-bottom: none;
-}
-
-.spec-label {
-    font-weight: 700;
-    color: var(--dark-grey);
-}
-
-.product-actions-detail {
-    display: flex;
-    gap: 20px;
-}
-
-.btn-whatsapp-large {
-    flex: 1;
-    background: #25D366;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 1.1rem;
+.product-swiper .swiper-slide {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+}
+
+.product-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+    transition: transform 0.8s ease;
+}
+
+.product-swiper:hover .swiper-slide img {
+    transform: scale(1.02);
+}
+
+.product-swiper .swiper-button-next,
+.product-swiper .swiper-button-prev {
+    color: var(--gold);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.product-swiper .swiper-button-next::after,
+.product-swiper .swiper-button-prev::after {
+    font-size: 1.1rem;
+}
+
+.product-swiper .swiper-button-next:hover,
+.product-swiper .swiper-button-prev:hover {
+    background: var(--gold);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+/* CONTENT TABS */
+.product-details-content {
+    border-top: 1px solid #eee;
+    padding-top: 40px;
+}
+
+.details-tabs {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: #999;
+    cursor: pointer;
+    padding-bottom: 10px;
+    position: relative;
     transition: var(--transition);
 }
 
-.btn-whatsapp-large:hover {
-    background: #128C7E;
-    transform: translateY(-3px);
+.tab-btn.active {
+    color: var(--black);
 }
 
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 30px;
-    color: var(--gold);
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--gold);
+}
+
+.hidden {
+    display: none;
+}
+
+.section-title-small {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--black);
+}
+
+.lux-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #666;
+    max-width: 800px;
+    text-align: justify;
+}
+
+.lux-specs-list {
+    list-style: none;
+    padding: 0;
+}
+
+.lux-specs-list li {
+    padding: 15px 0;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lux-specs-list li strong {
+    color: var(--black);
     font-weight: 600;
 }
 
-@media (max-width: 992px) {
-    .product-detail-flex {
-        flex-direction: column;
+.lux-specs-list li span {
+    color: #888;
+}
+
+/* SIDEBAR - BOUTIQUE */
+.product-boutique-sidebar {
+    position: sticky;
+    top: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.boutique-card {
+    background: var(--black);
+    color: var(--white);
+    padding: 60px 40px;
+    border-radius: 2px;
+}
+
+.lux-tag {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.lux-title {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+}
+
+.boutique-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 40px;
+}
+
+.lux-price-area {
+    margin-bottom: 40px;
+}
+
+.lux-old-price {
+    font-size: 1.1rem;
+    color: #666;
+    text-decoration: line-through;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.lux-price {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.lux-price .symbol {
+    font-size: 1.5rem;
+    color: var(--gold);
+}
+
+.lux-price .val {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.lux-payment-info {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+.boutique-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.btn-lux-primary {
+    background: var(--gold);
+    color: var(--white);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+}
+
+.btn-lux-primary:hover {
+    background: var(--gold-dark);
+    padding-left: 25px;
+}
+
+.btn-lux-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    padding: 18px;
+    text-align: center;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-lux-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.brand-commitments {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.commitment-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.commitment-item i {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-top: 4px;
+}
+
+.commitment-item h4 {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    color: var(--white);
+}
+
+.commitment-item p {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* BOUTIQUE IDENTITY */
+.boutique-identity {
+    padding: 30px;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+.mini-logo {
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.brand-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.brand-info p {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 20px;
+}
+
+.boutique-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.boutique-social a {
+    font-size: 1.1rem;
+    color: #ccc;
+    transition: var(--transition);
+}
+
+.boutique-social a:hover {
+    color: var(--gold);
+}
+
+@media (max-width: 1200px) {
+    .product-luxury-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
     }
 
-    .product-content h1 {
-        font-size: 2rem;
+    .product-boutique-sidebar {
+        position: static;
+    }
+
+    .product-main-view {
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-wrapper {
+        flex-direction: column-reverse;
+    }
+
+    .product-thumbnails-list {
+        flex-direction: row;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .lux-thumb {
+        flex-shrink: 0;
+    }
+
+    .product-main-view {
+        height: 400px;
+    }
+
+    .lux-title {
+        font-size: 2.2rem;
+    }
+
+    .boutique-card {
+        padding: 40px 20px;
     }
 }
